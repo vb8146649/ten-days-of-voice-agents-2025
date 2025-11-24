@@ -1,0 +1,224 @@
+import logging
+import json
+import os
+from datetime import datetime
+from typing import List, Optional
+from dataclasses import dataclass, field, asdict
+from dotenv import load_dotenv
+
+from livekit.agents import (
+    Agent,
+    AgentSession,
+    JobContext,
+    JobProcess,
+    MetricsCollectedEvent,
+    RoomInputOptions,
+    WorkerOptions,
+    cli,
+    metrics,
+    tokenize,
+    function_tool,
+    RunContext
+)
+from livekit.plugins import murf, silero, google, deepgram, noise_cancellation
+from livekit.plugins.turn_detector.multilingual import MultilingualModel
+
+logger = logging.getLogger("wellness-agent")
+
+load_dotenv(".env.local")
+
+DB_FILE = "wellness_log.json"
+
+# --- Data Models ---
+
+@dataclass
+class CheckInEntry:
+    timestamp: str = ""
+    mood: Optional[str] = None
+    energy: Optional[str] = None
+    goals: List[str] = field(default_factory=list)
+    summary: Optional[str] = None
+
+    def is_complete(self) -> bool:
+        # We consider it ready for recap if we have at least mood or energy, and goals.
+        return (self.mood is not None or self.energy is not None) and len(self.goals) > 0
+
+    def to_dict(self):
+        return asdict(self)
+
+@dataclass
+class SessionState:
+    current_entry: CheckInEntry
+    history_summary: str = ""
+
+# --- Helper Functions ---
+
+def load_history() -> List[dict]:
+    """Reads the JSON log file and returns a list of past entries."""
+    if not os.path.exists(DB_FILE):
+        return []
+    try:
+        with open(DB_FILE, "r") as f:
+            data = json.load(f)
+            if isinstance(data, list):
+                return data
+            return []
+    except Exception as e:
+        logger.error(f"Failed to load history: {e}")
+        return []
+
+def append_entry(entry: CheckInEntry):
+    """Appends a new entry to the JSON log file."""
+    history = load_history()
+    # Add timestamp right before saving if not present
+    if not entry.timestamp:
+        entry.timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    history.append(entry.to_dict())
+    
+    with open(DB_FILE, "w") as f:
+        json.dump(history, f, indent=2)
+
+# --- Agent Definition ---
+
+class WellnessCompanion(Agent):
+    def __init__(self, history_context: str) -> None:
+        super().__init__(
+            instructions=f"""
+            You are a compassionate, grounded, and supportive Wellness Voice Companion.
+            Your job is to conduct a daily check-in with the user.
+            
+            PAST CONTEXT:
+            {history_context}
+            
+            YOUR ROUTINE:
+            1. **Check-in**: Ask about their mood and energy levels (e.g., "How are you feeling today?", "What's your energy like?").
+               - Reference the PAST CONTEXT if relevant (e.g., "Last time you were tired, are you feeling better?").
+            2. **Objectives**: Ask for 1-3 simple intentions or goals for today.
+            3. **Reflect**: Offer *brief*, grounded, non-medical advice based on their input (e.g., "Sounds busy, maybe take a 5-minute breather").
+            4. **Recap & Confirm**: Summarize what they told you (Mood + Goals) and ask "Does that capture it?"
+            5. **Save**: Once they confirm, call the `save_journal_entry` tool.
+            
+            GUIDELINES:
+            - Do NOT provide medical diagnoses or advice. You are a companion, not a doctor.
+            - Be concise. Voice interactions should be conversational, not monologues.
+            - Use the `update_journal` tool to record data as the user speaks.
+            """
+        )
+
+    @function_tool
+    async def update_journal(
+        self, 
+        ctx: RunContext[SessionState], 
+        mood: Optional[str] = None, 
+        energy: Optional[str] = None, 
+        goals: Optional[List[str]] = None
+    ):
+        """
+        Record or update the user's mood, energy, and goals for the day.
+        Call this whenever the user provides these details.
+        """
+        entry = ctx.userdata.current_entry
+        
+        if mood: entry.mood = mood
+        if energy: entry.energy = energy
+        if goals: entry.goals = goals
+
+        # Feedback to the LLM about what is captured so far
+        status = []
+        if entry.mood: status.append(f"Mood: {entry.mood}")
+        if entry.energy: status.append(f"Energy: {entry.energy}")
+        if entry.goals: status.append(f"Goals: {entry.goals}")
+        
+        return f"Journal updated. Current State: {', '.join(status)}. If this looks complete, please RECAP it to the user and ask for confirmation."
+
+    @function_tool
+    async def save_journal_entry(self, ctx: RunContext[SessionState], final_summary: str):
+        """
+        Finalize and save the daily check-in to disk. 
+        Call this ONLY after the user has explicitly CONFIRMED the recap.
+        
+        Args:
+            final_summary: A short, one-sentence summary generated by you (the Agent) to describe this entry.
+        """
+        entry = ctx.userdata.current_entry
+        entry.summary = final_summary
+        
+        try:
+            append_entry(entry)
+            return "Entry saved successfully to wellness_log.json. You can now wish the user a good day and end the session."
+        except Exception as e:
+            return f"Error saving entry: {e}"
+
+
+def prewarm(proc: JobProcess):
+    proc.userdata["vad"] = silero.VAD.load()
+
+
+async def entrypoint(ctx: JobContext):
+    ctx.log_context_fields = {
+        "room": ctx.room.name,
+    }
+    
+    # 1. Load History
+    history = load_history()
+    history_context = "This is the user's first session."
+    
+    if history:
+        last_entry = history[-1]
+        history_context = (
+            f"Last check-in was on {last_entry.get('timestamp')}. "
+            f"User felt: {last_entry.get('mood', 'unknown')}. "
+            f"Goals were: {', '.join(last_entry.get('goals', []))}."
+        )
+
+    # 2. Initialize Session State
+    initial_state = SessionState(
+        current_entry=CheckInEntry(),
+        history_summary=history_context
+    )
+
+    session = AgentSession(
+        userdata=initial_state,
+        stt=deepgram.STT(model="nova-3"),
+        llm=google.LLM(
+            model="gemini-2.5-flash",
+        ),
+        tts=murf.TTS(
+            voice="en-US-matthew", 
+            style="Conversation",
+            tokenizer=tokenize.basic.SentenceTokenizer(min_sentence_len=2),
+            text_pacing=True
+        ),
+        turn_detection=MultilingualModel(),
+        vad=ctx.proc.userdata["vad"],
+        preemptive_generation=True,
+    )
+    
+    # Log usage
+    usage_collector = metrics.UsageCollector()
+    @session.on("metrics_collected")
+    def _on_metrics_collected(ev: MetricsCollectedEvent):
+        metrics.log_metrics(ev.metrics)
+        usage_collector.collect(ev.metrics)
+
+    async def log_usage():
+        summary = usage_collector.get_summary()
+        logger.info(f"Usage: {summary}")
+
+    ctx.add_shutdown_callback(log_usage)
+
+    # 3. Start Agent with History Context
+    await session.start(
+        agent=WellnessCompanion(history_context=history_context),
+        room=ctx.room,
+        room_input_options=RoomInputOptions(
+            noise_cancellation=noise_cancellation.BVC(),
+        ),
+    )
+
+    await ctx.connect()
+
+
+if __name__ == "__main__":
+    cli.run_app(WorkerOptions(entrypoint_fnc=entrypoint, prewarm_fnc=prewarm))

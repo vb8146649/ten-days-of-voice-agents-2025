@@ -1,0 +1,20 @@
+[
+  {
+    "timestamp": "2025-11-23 22:29:31",
+    "mood": "a little sick, constantly facing headaches",
+    "energy": "tired",
+    "goals": [
+      "do my work properly"
+    ],
+    "summary": "User is feeling a little sick, constantly facing headaches, and tired. Goal for today is to do work properly."
+  },
+  {
+    "timestamp": "2025-11-24 12:07:30",
+    "mood": "good (got a raise)",
+    "energy": null,
+    "goals": [
+      "prepare a timetable to achieve employee of the week"
+    ],
+    "summary": "User is feeling good today due to a raise. Their goal is to prepare a timetable to achieve their next career goal of being employee of the week."
+  }
+]
