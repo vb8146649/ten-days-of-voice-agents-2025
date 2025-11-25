@@ -1,0 +1,20 @@
+[
+  {
+    "id": "variables",
+    "title": "Variables",
+    "summary": "Variables are containers for storing data values. Think of them like labeled boxes where you can put information to use later in your program.",
+    "sample_question": "In your own words, what is a variable, and can you give a real-world analogy for it?"
+  },
+  {
+    "id": "loops",
+    "title": "Loops",
+    "summary": "Loops allow you to repeat a block of code multiple times. This saves you from writing the same code over and over again.",
+    "sample_question": "What is the primary difference between a 'for' loop and a 'while' loop?"
+  },
+  {
+    "id": "functions",
+    "title": "Functions",
+    "summary": "A function is a block of code which only runs when it is called. You can pass data, known as parameters, into a function.",
+    "sample_question": "Why do we use functions instead of writing all our code in one big block?"
+  }
+]
