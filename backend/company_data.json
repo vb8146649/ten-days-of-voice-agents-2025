@@ -1,0 +1,48 @@
+{
+  "company": "Razorpay",
+  "overview": "Razorpay is India's leading payments solution provider that allows businesses to accept, process, and disburse payments with its product suite.",
+  "products": [
+    {
+      "name": "Payment Gateway",
+      "description": "Accept online payments via 100+ payment modes including Credit/Debit cards, Netbanking, UPI, and Wallets.",
+      "keywords": ["gateway", "online payment", "website", "integration"]
+    },
+    {
+      "name": "Payment Links",
+      "description": "Share payment links via SMS, Email, or WhatsApp and get paid immediately. No website required.",
+      "keywords": ["link", "sms", "whatsapp", "no website"]
+    },
+    {
+      "name": "Razorpay Payroll",
+      "description": "Automate payroll calculation and salary disbursal. Handles compliance like PF, PT, and TDS automatically.",
+      "keywords": ["payroll", "salary", "compliance", "tax", "employee"]
+    }
+  ],
+  "pricing": {
+    "standard": "Our standard plan charges 2% per transaction for Indian Consumer Credit Cards, Netbanking, and Wallets. UPI is 0%.",
+    "setup_fee": "There are Zero setup fees and Zero annual maintenance charges for the standard plan.",
+    "enterprise": "For high volumes, we offer custom pricing. You would need to speak with our sales director."
+  },
+  "faqs": [
+    {
+      "question": "Do you have a free tier?",
+      "answer": "We don't have a 'free tier' per se, but we have a 'No Cost' setup. You only pay when you transact (2% standard fee). If you don't do any transactions, you pay nothing.",
+      "keywords": ["free", "cost", "charge", "pricing"]
+    },
+    {
+      "question": "How long does settlement take?",
+      "answer": "Standard settlement cycle is T+2 days. We also offer 'Instant Settlements' for eligible businesses to get money immediately 24x7.",
+      "keywords": ["settlement", "money", "bank", "deposit"]
+    },
+    {
+      "question": "Is documentation required?",
+      "answer": "Yes, as a regulated payment aggregator, we require KYC documents like PAN, GST (if applicable), and bank account details to activate your account.",
+      "keywords": ["document", "kyc", "paperwork", "pan", "gst"]
+    },
+    {
+      "question": "Who is this for?",
+      "answer": "Razorpay is built for everyone from freelancers and home-businesses to large enterprises like Swiggy and Zomato.",
+      "keywords": ["who", "target", "customer", "freelancer"]
+    }
+  ]
+}
