@@ -1,0 +1,41 @@
+[
+  {
+    "userName": "John Doe",
+    "securityIdentifier": "1234",
+    "cardEnding": "4242",
+    "status": "pending_review",
+    "transactionName": "Apple Store",
+    "transactionAmount": "$999.00",
+    "transactionTime": "Today at 2:30 PM",
+    "transactionLocation": "San Francisco, CA",
+    "securityQuestion": "What is the name of your first pet?",
+    "securityAnswer": "rover",
+    "outcome": ""
+  },
+  {
+    "userName": "Alice Smith",
+    "securityIdentifier": "9876",
+    "cardEnding": "1122",
+    "status": "pending_review",
+    "transactionName": "Unknown Crypto Exchange",
+    "transactionAmount": "$5,000.00",
+    "transactionTime": "Yesterday at 11:45 PM",
+    "transactionLocation": "Lagos, Nigeria",
+    "securityQuestion": "What is your mother's maiden name?",
+    "securityAnswer": "jones",
+    "outcome": ""
+  },
+  {
+    "userName": "Bob Brown",
+    "securityIdentifier": "5555",
+    "cardEnding": "8888",
+    "status": "confirmed_safe",
+    "transactionName": "Gas Station 7-Eleven",
+    "transactionAmount": "$45.50",
+    "transactionTime": "Today at 6:15 AM",
+    "transactionLocation": "Austin, TX",
+    "securityQuestion": "What city were you born in?",
+    "securityAnswer": "chicago",
+    "outcome": "User confirmed the transaction for $45.50 at 7-Eleven in Austin, TX was legitimate."
+  }
+]
