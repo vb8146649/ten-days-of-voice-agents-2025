@@ -1,0 +1,163 @@
+[
+  {
+    "order_id": "ORD-1764321407",
+    "timestamp": "2025-11-28 14:46:47.286085",
+    "customer": "Vishal",
+    "items": [
+      {
+        "item_id": "g_bread",
+        "name": "Whole Wheat Bread",
+        "price": 3.5,
+        "quantity": 1,
+        "notes": ""
+      },
+      {
+        "item_id": "g_pb",
+        "name": "Creamy Peanut Butter",
+        "price": 4.5,
+        "quantity": 1,
+        "notes": ""
+      }
+    ],
+    "total": 8.0,
+    "status": "placed"
+  },
+  {
+    "order_id": "ORD-1764321809",
+    "timestamp": "2025-11-28 14:53:29.873181",
+    "customer": "Michelle",
+    "items": [
+      {
+        "item_id": "g_bread",
+        "name": "Whole Wheat Bread",
+        "price": 3.5,
+        "quantity": 1,
+        "notes": ""
+      },
+      {
+        "item_id": "g_pb",
+        "name": "Creamy Peanut Butter",
+        "price": 4.5,
+        "quantity": 1,
+        "notes": ""
+      }
+    ],
+    "total": 8.0,
+    "status": "placed"
+  },
+  {
+    "order_id": "ORD-1764322378",
+    "timestamp": "2025-11-28 15:02:58.560647",
+    "customer": "Vishal",
+    "items": [
+      {
+        "item_id": "g_bread",
+        "name": "Whole Wheat Bread",
+        "price": 3.5,
+        "quantity": 1,
+        "notes": ""
+      },
+      {
+        "item_id": "g_pb",
+        "name": "Creamy Peanut Butter",
+        "price": 4.5,
+        "quantity": 1,
+        "notes": ""
+      }
+    ],
+    "total": 8.0,
+    "status": "placed"
+  },
+  {
+    "order_id": "ORD-1764323105",
+    "timestamp": "2025-11-28 15:15:05.769730",
+    "customer": "Vishal",
+    "items": [
+      {
+        "item_id": "g_bread",
+        "name": "Whole Wheat Bread",
+        "price": 3.5,
+        "quantity": 1,
+        "notes": ""
+      },
+      {
+        "item_id": "g_pb",
+        "name": "Creamy Peanut Butter",
+        "price": 4.5,
+        "quantity": 1,
+        "notes": ""
+      }
+    ],
+    "total": 8.0,
+    "status": "placed"
+  },
+  {
+    "order_id": "ORD-1764323355",
+    "timestamp": "2025-11-28 15:19:15.040839",
+    "customer": "Vishal",
+    "items": [
+      {
+        "item_id": "g_bread",
+        "name": "Whole Wheat Bread",
+        "price": 3.5,
+        "quantity": 1,
+        "notes": ""
+      },
+      {
+        "item_id": "g_pb",
+        "name": "Creamy Peanut Butter",
+        "price": 4.5,
+        "quantity": 1,
+        "notes": ""
+      }
+    ],
+    "total": 8.0,
+    "status": "placed"
+  },
+  {
+    "order_id": "ORD-1764323558",
+    "timestamp": "2025-11-28 15:22:38.682420",
+    "customer": "Vishal",
+    "items": [
+      {
+        "item_id": "g_bread",
+        "name": "Whole Wheat Bread",
+        "price": 3.5,
+        "quantity": 1,
+        "notes": ""
+      },
+      {
+        "item_id": "g_pb",
+        "name": "Creamy Peanut Butter",
+        "price": 4.5,
+        "quantity": 1,
+        "notes": ""
+      }
+    ],
+    "total": 8.0,
+    "status": "placed"
+  },
+  {
+    "order_id": "ORD-1764323746",
+    "timestamp": "2025-11-28 15:25:46.052281",
+    "customer": "Vishal",
+    "items": [
+      {
+        "item_id": "g_bread",
+        "name": "Whole Wheat Bread",
+        "price": 3.5,
+        "quantity": 1,
+        "notes": ""
+      },
+      {
+        "item_id": "g_pb",
+        "name": "Creamy Peanut Butter",
+        "price": 4.5,
+        "quantity": 1,
+        "notes": ""
+      }
+    ],
+    "total": 8.0,
+    "status": "placed"
+  }
+]

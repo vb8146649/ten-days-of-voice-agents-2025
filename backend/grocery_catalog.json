@@ -1,0 +1,72 @@
+[
+  {
+    "id": "g_bread",
+    "name": "Whole Wheat Bread",
+    "category": "Groceries",
+    "price": 3.50,
+    "tags": ["bakery", "vegan"]
+  },
+  {
+    "id": "g_milk",
+    "name": "Organic Milk",
+    "category": "Groceries",
+    "price": 4.25,
+    "tags": ["dairy", "beverage"]
+  },
+  {
+    "id": "g_eggs",
+    "name": "Large Eggs (Dozen)",
+    "category": "Groceries",
+    "price": 5.00,
+    "tags": ["dairy", "protein"]
+  },
+  {
+    "id": "g_pb",
+    "name": "Creamy Peanut Butter",
+    "category": "Groceries",
+    "price": 4.50,
+    "tags": ["pantry", "vegan"]
+  },
+  {
+    "id": "g_jelly",
+    "name": "Strawberry Jam",
+    "category": "Groceries",
+    "price": 3.75,
+    "tags": ["pantry", "vegan"]
+  },
+  {
+    "id": "g_pasta",
+    "name": "Spaghetti Pasta",
+    "category": "Groceries",
+    "price": 2.00,
+    "tags": ["pantry", "vegan"]
+  },
+  {
+    "id": "g_sauce",
+    "name": "Marinara Sauce",
+    "category": "Groceries",
+    "price": 3.50,
+    "tags": ["pantry", "vegan"]
+  },
+  {
+    "id": "s_chips",
+    "name": "Sea Salt Potato Chips",
+    "category": "Snacks",
+    "price": 1.99,
+    "tags": ["snack", "gluten-free"]
+  },
+  {
+    "id": "p_pizza",
+    "name": "Pepperoni Pizza (Frozen)",
+    "category": "Prepared Food",
+    "price": 11.50,
+    "tags": ["frozen", "dinner"]
+  },
+  {
+    "id": "p_sandwich",
+    "name": "Club Sandwich",
+    "category": "Prepared Food",
+    "price": 8.50,
+    "tags": ["fresh", "lunch"]
+  }
+]
