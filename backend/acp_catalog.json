@@ -1,0 +1,63 @@
+[
+  {
+    "id": "hoodie-blk-m",
+    "name": "Classic Black Hoodie (M)",
+    "price": 2500,
+    "currency": "INR",
+    "category": "apparel",
+    "color": "black",
+    "size": "M"
+  },
+  {
+    "id": "hoodie-blk-l",
+    "name": "Classic Black Hoodie (L)",
+    "price": 2500,
+    "currency": "INR",
+    "category": "apparel",
+    "color": "black",
+    "size": "L"
+  },
+  {
+    "id": "hoodie-blue-m",
+    "name": "Cozy Blue Hoodie (M)",
+    "price": 2600,
+    "currency": "INR",
+    "category": "apparel",
+    "color": "blue",
+    "size": "M"
+  },
+  {
+    "id": "tee-wht-s",
+    "name": "Basic White T-Shirt",
+    "price": 800,
+    "currency": "INR",
+    "category": "apparel",
+    "color": "white",
+    "size": "S"
+  },
+  {
+    "id": "tee-blk-graphic",
+    "name": "Graphic Print Tee",
+    "price": 1200,
+    "currency": "INR",
+    "category": "apparel",
+    "color": "black",
+    "size": "L"
+  },
+  {
+    "id": "mug-001",
+    "name": "Stoneware Coffee Mug",
+    "price": 450,
+    "currency": "INR",
+    "category": "home",
+    "color": "white"
+  },
+  {
+    "id": "mug-002",
+    "name": "Matte Black Travel Mug",
+    "price": 950,
+    "currency": "INR",
+    "category": "home",
+    "color": "black"
+  }
+]
